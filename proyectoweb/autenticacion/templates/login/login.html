@@ -1,0 +1,32 @@
+{% extends 'proyectowebapp/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block content %}
+<div style="text-align: justify;width: 55%;margin: auto;">
+<form action="" method="post" style="color: white;">{% csrf_token %}
+{% if messages %}
+ {% for mensaje in messages %}
+    <script>
+        Swal.fire({
+        "title":"felicitaciones",
+        "text":"{{m}}",
+        "icon":"success"
+        })
+  </script>
+ <!-- <span class="alert alert-{{mensaje.tags}}">{{mensaje}}</span>
+ {{mensaje}} -->
+ {% endfor %}
+
+
+{% endif %}
+
+{{form|crispy}}
+
+<button type="submit" class="btn btn-success" style="display: flex;margin: auto;">Login</button>
+</form>
+</div>
+
+{% endblock %}

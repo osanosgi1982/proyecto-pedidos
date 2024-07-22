@@ -1,0 +1,62 @@
+<p style="color: white;">este es el carrito</p>
+<table class="table table-bordered" style="color: white;">
+    <thead>
+        <tr>
+            <th colspan="3" class="text-center">
+                Carro Compras
+            </th>
+        </tr>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Suma</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        {% if request.session.carro.items %} <!-- para evaluar si hay articulos en el carro -->
+            {% for key,value in request.session.carro.items %}
+               <tr class="texte-center">
+                   <td>{{value.nombre}}</td>
+                   <td>{{value.cantidad}}</td>
+                   <!-- crearemos los botones 07 de mayo -->
+                   <td>
+                       <a href="{% url 'carro:agregar' value.producto_id %}" class="btn btn-sucess">+</a>
+                       <a href="{% url 'carro:restar' value.producto_id %}" class="btn btn-sucess">-</a><br>
+                       $ {{value.precio}}
+                   </td>
+               </tr>
+            {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">
+                <div class="alert alert-danger text-center">Sin Productos</div> <!-- este segmento es de bootstrap para saber cuando no hay elementos en el carro -->
+            </td>
+        </tr>
+        {% endif %}
+
+    </tbody>
+    <!-- luego aqui para crear la sumatoria 07 de mayo -->
+    <tfoot>
+        <tr>
+            <td colspan="3">
+                Total: $ {{importe_total_carro}}
+
+            </td>
+        </tr>
+        <!-- inicio para el boton de compra -->
+        <!-- ciclo para decir si esta con sesion y articulos en el carro -->
+        {% if request.session.carro.items %}
+        <tr>
+            <td colspan="3" style="text-align: center;">
+            <a href="../pedidos" class="btn btn-sucess" style="background-color: green; color: white;">Comprar <i class="bi bi-envelope-arrow-up-fill" style="width: 40%;"></i></a>
+            </td>
+        </tr>
+        {% endif %}
+
+
+    </tfoot>
+
+
+
+</table>

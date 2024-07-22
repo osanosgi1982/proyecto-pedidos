@@ -1,0 +1,40 @@
+{% extends 'proyectowebapp/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<!-- inicio comentado
+{% for serv in servicios %}
+<h1 style="border: 2px; color: aliceblue;">{{serv.titulo}}</h1>
+<p style="border: 3px; color: green;">{{serv.contenido}}</p>
+<p><img src="{{serv.imagen.url}}"></p>
+
+
+{% endfor %}
+fin comentado -->
+
+{% for serv in servicios %}
+
+<section class="page-section clearfix">
+    <div class="container">
+      <div class="intro">
+        <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{serv.imagen.url}}" alt="" style="width: 50%;">
+        <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+          <h2 class="section-heading mb-4" >
+            <span class="section-heading-lower">{{serv.titulo}}</span>
+            <span class="section-heading-upper">{{serv.contenido}}</span>
+          </h2>
+          <!-- <p class="mb-3">En la puertra de tu casa en menos de 48 h con el envío normal. En menos de 24 h con el envío express. -->
+          <!-- </p> -->
+         
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endfor %}
+{% include "proyectowebapp/paginacion.html" %}
+
+<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/0ZJXEW_jteg?si=iVeRo7uibq9XYMfl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'proyectowebapp/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<script>
+    window.onload = function() {
+        var diccionario = JSON.parse('{{ diccionario|escapejs }}');
+        var suma = 0;
+        for (var key in diccionario) {
+            suma += parseFloat(diccionario[key]);
+        }
+        document.getElementById('resultado').innerText = 'La suma es: ' + suma;
+    }
+</script>
+
+
+<!--<div class="col-md-4"> --><!--define las cantidad de columnas-->
+    <h1 style="color: white;">Conteo</h1>
+   
+    <h1 style="color: white; margin: 0 auto;"> <strong>Productos {{productos|length}}</strong></h1>
+    <h1>Suma de Valores</h1>
+    <div id="resultado"></div>
+   
+<table border="3" style="color: rgb(15, 15, 15); margin: 0 auto;" >
+    <thead>
+        <tr>
+            <td>id</td>
+            <td>Nombre</td>
+            <td>Precio</td>
+            <td>Imagen</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% if productos %}
+        {% for producto in productos %}
+        <tr>
+            <td>{{producto.id}}</td>
+            <td>{{producto.nombre}}</td>
+            <td>{{producto.precio}}</td>
+            <td><img src="{{producto.imagen.url}}"></td>
+        </tr>
+        
+    </tbody>
+    {% endfor %}
+        {% else %}
+            <h1>No hay productos</h1>
+        {% endif %}
+
+</table>
+<!-- </div>  -->
+<a href="{% url 'reporte' %}">Exportar a Excel</a>
+<a href="{% url 'productos' %}">Exportar a pdf</a>
+
+
+{% endblock %}

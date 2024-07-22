@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Factura de Pedido</h2>
+    <i class="bi bi-envelope-arrow-up-fill"></i>
+
+    
+    Hola: {{nombreusuario}} <br>
+    Nro Pedido: {{pedido.id}} <br>
+    Email de Usuario: {{emailusuario}}
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Sub total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for linea_pedido in lineas_pedido %}
+            <tr>
+                <td>{{linea_pedido.producto}}</td>
+                <td>{{linea_pedido.cantidad}}</td>
+                <td>{{linea_pedido.precio_unitario}}</td>
+                <td>{{linea_pedido.subtotal}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        total: ${{total}}
+    </table>
+
+</body>
+</html>

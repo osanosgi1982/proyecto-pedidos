@@ -1,0 +1,60 @@
+{% extends 'proyectowebapp/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+ 
+  <!-- 06 de mayo este div segmento sirve para poder sumar los valores del carrito -->
+  <div style="float: right;">
+    <!-- <p style="color: white;">Total: $ {{importe_total_carro}}</p> esto es para los totales -->
+    {% if request.user.is_authenticated %}
+      {% include 'carro/widget.html' %} 
+    {% else %}
+      <span class="alert alert-danger text-center">Login para ver Carro</span>
+    {% endif %}
+  </div>
+<!-- 06 de mayo -->
+
+<div class="row"> <!--para cargar los productos en filas-->
+{% for producto in productos %}
+<!--segmento de codigo que conserva los valores de la base del proyecto, se cambiara a tarjetas
+<section class="page-section clearfix">
+    <div class="container">
+      <div class="intro">
+        <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{{producto.imagen.url}}" alt="" style="width: 50%;">
+        <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+          <h2 class="section-heading mb-4" >
+            <span class="section-heading-lower">{{producto.nombre}}</span>
+            <span class="section-heading-upper">$&nbsp;{{producto.precio}}</span>
+          </h2>
+         
+        </div>
+      </div>
+    </div>
+  </section>-->
+<div class="col-md-4"> <!--define las cantidad de columnas-->
+<div class="card" style="width: 100%; margin: 5px 5px;">  <!--clase de boostrap para las tarjetas-->
+    <img src="{{producto.imagen.url}}" class="card-img-top">
+
+    <div class="card-body" style="text-align: center;"> <!--clase body de la tarjeta-->
+
+        <h7 class="card-title">{{producto.nombre}}</h7><!--clase title de la tarjeta para anexar titulo-->
+            
+        <p class="card-text">{{producto.precio}}</p><!--clase text de la tarjeta para anexar texto-->
+        <p class="card-text">{{producto.cateogrias}}</p><!--clase text de la tarjeta para anexar texto-->
+
+
+    </div> 
+
+ <div class="card-footer text-center">
+   <a href="{% url 'carro:agregar' producto.id %}" class="btn btn-sucess" style="background-color: green; color: white;">Agregar al Carrito</a>
+
+ </div>
+
+</div> <!--ciere class card-->
+</div>
+{% endfor %}
+</div> <!--ciere class row-->
+</div><!--ciere class container-->
+{% endblock %}

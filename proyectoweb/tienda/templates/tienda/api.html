@@ -1,0 +1,29 @@
+{% extends 'proyectowebapp/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% if diccionario %}
+        <select id="miComboBox">
+        {% for i,j in diccionario.items %}
+
+
+        
+            <option value="{{i}}">{{j}}</option>
+        
+        {% endfor %}
+        </select>
+    {% endif %}
+
+
+
+<h1 style="color: white;">Holis</h1>
+{% if diccionario %}
+        {% for materiales in diccionario.values %}
+        <h1>{{ materiales }}</h1>
+        {% endfor %}
+    {% endif %}
+
+
+{% endblock %}
